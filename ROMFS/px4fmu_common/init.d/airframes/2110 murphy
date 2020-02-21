@@ -1,0 +1,54 @@
+#!/bin/sh
+#
+# @name DEP STOL Murphy
+#
+# @type Standard Plane
+# @class Plane
+#
+# @output MAIN1 motor 1
+# @output MAIN2 motor 2
+# @output MAIN3 motor 3
+# @output MAIN4 motor 4
+# @output MAIN5 motor 5
+# @output MAIN6 motor 6
+# @output MAIN7 motor 7
+# @output MAIN8 motor 8
+#
+# @output AUX1 feed-through of RC AUX1 channel (wing morphing)
+# @output AUX2 feed-through of RC AUX2 channel
+# @output AUX3 feed-through of RC AUX3 channel
+# @output AUX4 flap 1
+# @output AUX5 flap 2
+# @output AUX6 flap 3
+# @output AUX7 flap 4
+#
+# @maintainer unknown
+#
+
+sh /etc/init.d/rc.fw_defaults
+
+if [ $AUTOCNF = yes ]
+then
+	param set FW_AIRSPD_MIN 10
+	param set FW_AIRSPD_TRIM 15
+	param set FW_AIRSPD_MAX 20
+
+	param set FW_MAN_P_MAX 55
+	param set FW_MAN_R_MAX 55
+	param set FW_R_LIM 55
+
+	param set FW_WR_FF 0.2
+	param set FW_WR_I 0.2
+	param set FW_WR_IMAX 0.8
+	param set FW_WR_P 1
+	param set FW_W_RMAX 0
+
+	# set disarmed value for the ESC
+	param set PWM_DISARMED 1000
+fi
+
+set MIXER murphy
+set MIXER_AUX murphy
+
+# use PWM parameters for throttle channels
+set PWM_OUT 12345678
